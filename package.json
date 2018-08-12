@@ -1,0 +1,32 @@
+{
+  "name": "javascript-snake-game",
+  "version": "1.0.0",
+  "description": "A JavaScript Object Oriented 'Snake' Game",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install && gulp serve"
+  },
+  "author": "Gabriel Ferraz",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-env": "^2.4.1",
+    "babel-eslint": "^8.2.6",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.24.6",
+    "browserify": "^16.2.2",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-inject": "^4.3.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "lodash": "^4.17.10",
+    "path": "^0.12.7",
+    "run-sequence": "^2.2.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}
