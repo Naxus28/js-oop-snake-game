@@ -13,6 +13,7 @@ const buffer = require('vinyl-buffer'),
       gulp = require('gulp'),
       path = require('path'),
       plugins = require('gulp-load-plugins')(),
+      runSequence = require('run-sequence'),
       source = require('vinyl-source-stream');
 
 /*
@@ -44,18 +45,26 @@ gulp.task('html', () =>  gulp.src(config.srcFiles.html).pipe(gulp.dest(config.di
  */
 gulp.task('inject', ['scripts'], () => {
   const jsSource = gulp.src(path.join(config.dest.js,'index.js'), { read: false });
-  const targetHtml = config.dest.html;
 
-  return gulp.src(targetHtml)
+  return gulp.src(config.dest.html)
     .pipe(plugins.inject(jsSource, config.injectOptions))
     .pipe(gulp.dest(config.dirPaths.dev));
 }); 
 
 /*
+ * lint js
+ */
+gulp.task('lint', () => (
+  gulp.src(config.srcFiles.js)
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format())
+))
+
+/*
  * scripts
  */
-gulp.task('scripts', ['lint'], () => {
-  return browserify(config.srcFiles.js)
+gulp.task('scripts', ['lint'], () => (
+  browserify(config.srcFiles.js)
     .transform('babelify', { presets: ['env'] }) 
     .bundle()
     .on('error', plugins.notify.onError(config.notifyConfig('JAVASCRIPT')))
@@ -63,17 +72,28 @@ gulp.task('scripts', ['lint'], () => {
     .pipe(buffer()) // need to buffer to be able to use other js plugins
     .pipe(plugins.sourcemaps.init({ loadMaps: true })) 
     .pipe(plugins.sourcemaps.write('./'))
-    .pipe(gulp.dest(config.dest.js));
-}); 
+    .pipe(gulp.dest(config.dest.js))
+))
 
 /*
- * lint js
+ * serve
  */
-gulp.task('lint', () => {
-  return gulp.src(config.srcFiles.js)
-    .pipe(plugins.eslint())
-    .pipe(plugins.eslint.format());
-});
+let browserSyncInit = serveDir => (
+  browserSync({
+    server: {
+      baseDir: serveDir
+    }
+  })
+);
+
+
+// dev server
+gulp.task('serve', ['build', 'watch'], () => browserSyncInit(config.dirPaths.dev));
+
+/*
+ * reload servers
+ */
+gulp.task('reload', () => browserSync.reload()); 
 
 /*
  * watch
@@ -83,21 +103,3 @@ gulp.task('watch', () => {
   gulp.watch(config.srcFiles.js, () => runSequence('scripts', 'reload'));
 });
 
-/*
- * reload servers
- */
-gulp.task('reload', () => browserSync.reload());
-
-/*
- * servers
- */
-let browserSyncInit = serveDir => {
-  browserSync({
-    server: {
-      baseDir: serveDir
-    }
-  });
-};
-
-// development server
-gulp.task('serve', ['build', 'watch'], () => browserSyncInit(config.dirPaths.dev)); 

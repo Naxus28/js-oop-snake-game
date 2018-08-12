@@ -21,7 +21,7 @@ const srcFiles = {
 };
 
 /*
- * paths to destination dir/files
+ * paths to destination dir/file
  */
 const dest = {
   html: path.join(dirPaths.dev, 'index.html'),
@@ -37,18 +37,12 @@ const injectOptions = {
   relative: true 
 };
 
-/**
- * 'entries' needs to be a string or an array
- */
-const browserifyCustomOpts = entries => {
-  return  { entries, debug: true };
-}; 
 
 /*
  * notify plugin config--error handler
  */
-let notifyConfig = (fileType) => {
-  let config = {
+const notifyConfig = fileType => {
+  const config = {
     message: `ERROR ON ${fileType}: <%= error.message %>`,
     sound: false // deactivate Frog sound
   };
@@ -61,7 +55,6 @@ let notifyConfig = (fileType) => {
  * export module properties/functions
  */
 export default {
-  browserifyCustomOpts,
   dest,
   dirPaths,
   injectOptions,
