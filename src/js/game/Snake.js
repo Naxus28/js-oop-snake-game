@@ -17,27 +17,33 @@ export default class Snake {
 		this.position = this.snake[0];
 	}
 
+	/* public methods */
+	eat() {
+		this.snake.unshift(this._getNewHead());
+	}
+
+	getBoxSize() {
+		return this.boxSize;
+	}
+
+	setBoxSize(boxSize) {
+		this.boxSize = boxSize;
+	}
+
+	getColor() {
+		return this.color;
+	}
+
+	setColor(color) {
+		this.color = color;
+	}
+	
+	getPosition() {
+		return this.position;
+	}
+
 	getSnake() {
 		return this.snake;
-	}
-
-	setSnakeOnCanvas() {
-		this.ctx.fillStyle = this.color;
-		this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
-	}
-
-	draw(head) {
-		this.snake.unshift(head);
-		this.snake.pop();
-		this.ctx.fillStyle = this.color;
-		
-		this.snake.forEach(segment => {
-			this.ctx.fillRect(segment.x, segment.y, this.boxSize, this.boxSize);
-		});
-	}
-
-	setDirection(direction) {
-		this.direction = direction;
 	}
 
 	hasCollided(head) {
@@ -45,16 +51,38 @@ export default class Snake {
 			|| (head.y < 0 || head.y + this.boxSize > this.canvas.height);
 	}
 
-	eat() {
-		this.snake.unshift(this._getNewHead());
+	move(direction) {
+		if (!direction) {
+			this._draw(this.snake[0]);
+		} else {
+			this._setDirection(direction);
+
+			const head = this._getNewHead();
+			this._draw(head);
+
+			if (this.hasCollided(head)) {
+				this._setPosition({});
+			} else {
+				this._setPosition(head);
+			}
+		}
 	}
 
-	getPosition() {
-		return this.position;
+	setSnakeOnCanvas() {
+		this.ctx.fillStyle = this.color;
+		this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
 	}
 
-	setPosition(position) {
-		this.position = position;
+
+	/* private methods */
+	_draw(head) {
+		this.snake.unshift(head);
+		this.snake.pop();
+		this.ctx.fillStyle = this.color;
+		
+		this.snake.forEach(segment => {
+			this.ctx.fillRect(segment.x, segment.y, this.boxSize, this.boxSize);
+		});
 	}
 
 	_getNewHead() {
@@ -74,20 +102,11 @@ export default class Snake {
 		return { x: headX, y: headY };
 	}
 
-	move(direction) {
-		if (!direction) {
-			this.draw(this.snake[0]);
-		} else {
-			this.setDirection(direction);
-			
-			const head = this._getNewHead();
-			this.draw(head);
+	_setDirection(direction) {
+		this.direction = direction;
+	}
 
-			if (this.hasCollided(head)) {
-				this.setPosition({});
-			} else {
-				this.setPosition(head);
-			}
-		}
+	_setPosition(position) {
+		this.position = position;
 	}
 }

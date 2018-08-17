@@ -10,7 +10,6 @@ export default class Canvas {
 		const canvas = document.getElementById(this.canvasId);
 		canvas.height = this.height;
 		canvas.width = this.width;
-
 		return canvas;
 	}
 
@@ -23,10 +22,6 @@ export default class Canvas {
 		}
 	}
 
-
-	/**
-	 * accessor and mutator methods
-	 */
 	getCanvasId() {
 		return this.canvasId;
 	} 
@@ -39,9 +34,6 @@ export default class Canvas {
 		return this.canvas;
 	} 
 
-	/**
-	 * @param {HTML Node} canvas element
-	 */
 	setCanvas(canvas) {
 		this.canvas = canvas;
 	} 

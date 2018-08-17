@@ -29,7 +29,6 @@ var Canvas = function () {
 			var canvas = document.getElementById(this.canvasId);
 			canvas.height = this.height;
 			canvas.width = this.width;
-
 			return canvas;
 		}
 	}, {
@@ -42,11 +41,6 @@ var Canvas = function () {
 				return this.canvas.getContext('2d');
 			}
 		}
-
-		/**
-   * accessor and mutator methods
-   */
-
 	}, {
 		key: 'getCanvasId',
 		value: function getCanvasId() {
@@ -62,11 +56,6 @@ var Canvas = function () {
 		value: function getCanvas() {
 			return this.canvas;
 		}
-
-		/**
-   * @param {HTML Node} canvas element
-   */
-
 	}, {
 		key: 'setCanvas',
 		value: function setCanvas(canvas) {
@@ -121,7 +110,8 @@ var Controllers = function () {
 			39: 'RIGHT',
 			40: 'DOWN'
 		} : _ref$controllers,
-		    initialDirection = _ref.initialDirection;
+		    _ref$initialDirection = _ref.initialDirection,
+		    initialDirection = _ref$initialDirection === undefined ? 'RIGHT' : _ref$initialDirection;
 
 		_classCallCheck(this, Controllers);
 
@@ -201,6 +191,16 @@ var Food = function () {
 	}
 
 	_createClass(Food, [{
+		key: "getColor",
+		value: function getColor() {
+			return this.color;
+		}
+	}, {
+		key: "setColor",
+		value: function setColor(color) {
+			this.color = color;
+		}
+	}, {
 		key: "create",
 		value: function create() {
 			var boxCountOnXAxis = this.canvas.width / this.boxSize;
@@ -271,10 +271,66 @@ var Snake = function () {
 		this.position = this.snake[0];
 	}
 
+	/* public methods */
+
+
 	_createClass(Snake, [{
+		key: 'eat',
+		value: function eat() {
+			this.snake.unshift(this._getNewHead());
+		}
+	}, {
+		key: 'getBoxSize',
+		value: function getBoxSize() {
+			return this.boxSize;
+		}
+	}, {
+		key: 'setBoxSize',
+		value: function setBoxSize(boxSize) {
+			this.boxSize = boxSize;
+		}
+	}, {
+		key: 'getColor',
+		value: function getColor() {
+			return this.color;
+		}
+	}, {
+		key: 'setColor',
+		value: function setColor(color) {
+			this.color = color;
+		}
+	}, {
+		key: 'getPosition',
+		value: function getPosition() {
+			return this.position;
+		}
+	}, {
 		key: 'getSnake',
 		value: function getSnake() {
 			return this.snake;
+		}
+	}, {
+		key: 'hasCollided',
+		value: function hasCollided(head) {
+			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
+		}
+	}, {
+		key: 'move',
+		value: function move(direction) {
+			if (!direction) {
+				this._draw(this.snake[0]);
+			} else {
+				this._setDirection(direction);
+
+				var head = this._getNewHead();
+				this._draw(head);
+
+				if (this.hasCollided(head)) {
+					this._setPosition({});
+				} else {
+					this._setPosition(head);
+				}
+			}
 		}
 	}, {
 		key: 'setSnakeOnCanvas',
@@ -282,9 +338,12 @@ var Snake = function () {
 			this.ctx.fillStyle = this.color;
 			this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
 		}
+
+		/* private methods */
+
 	}, {
-		key: 'draw',
-		value: function draw(head) {
+		key: '_draw',
+		value: function _draw(head) {
 			var _this = this;
 
 			this.snake.unshift(head);
@@ -294,31 +353,6 @@ var Snake = function () {
 			this.snake.forEach(function (segment) {
 				_this.ctx.fillRect(segment.x, segment.y, _this.boxSize, _this.boxSize);
 			});
-		}
-	}, {
-		key: 'setDirection',
-		value: function setDirection(direction) {
-			this.direction = direction;
-		}
-	}, {
-		key: 'hasCollided',
-		value: function hasCollided(head) {
-			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
-		}
-	}, {
-		key: 'eat',
-		value: function eat() {
-			this.snake.unshift(this._getNewHead());
-		}
-	}, {
-		key: 'getPosition',
-		value: function getPosition() {
-			return this.position;
-		}
-	}, {
-		key: 'setPosition',
-		value: function setPosition(position) {
-			this.position = position;
 		}
 	}, {
 		key: '_getNewHead',
@@ -339,22 +373,14 @@ var Snake = function () {
 			return { x: headX, y: headY };
 		}
 	}, {
-		key: 'move',
-		value: function move(direction) {
-			if (!direction) {
-				this.draw(this.snake[0]);
-			} else {
-				this.setDirection(direction);
-
-				var head = this._getNewHead();
-				this.draw(head);
-
-				if (this.hasCollided(head)) {
-					this.setPosition({});
-				} else {
-					this.setPosition(head);
-				}
-			}
+		key: '_setDirection',
+		value: function _setDirection(direction) {
+			this.direction = direction;
+		}
+	}, {
+		key: '_setPosition',
+		value: function _setPosition(position) {
+			this.position = position;
 		}
 	}]);
 
@@ -394,7 +420,7 @@ var canvas = new _Canvas2.default();
 var ctx = canvas.getContext();
 
 /* CONTROLLERS */
-var controllers = new _Controllers2.default({ initialDirection: 'RIGHT' });
+var controllers = new _Controllers2.default({});
 
 controllers.keyboardListener();
 

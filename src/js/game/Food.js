@@ -7,6 +7,14 @@ export default class Food {
 		this.food;
 	}
 
+	getColor() {
+		return this.color;
+	}
+
+	setColor(color) {
+		this.color = color;
+	}
+
 	create() {
 		const boxCountOnXAxis = this.canvas.width / this.boxSize;
 		const boxCountOnYAxis = this.canvas.height / this.boxSize;

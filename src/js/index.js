@@ -13,7 +13,7 @@ const canvas = new Canvas();
 const ctx = canvas.getContext();
 
 /* CONTROLLERS */
-const controllers = new Controllers({ initialDirection: 'RIGHT' });
+const controllers = new Controllers({});
 
 controllers.keyboardListener();
 
