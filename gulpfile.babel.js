@@ -22,6 +22,7 @@ const buffer = require('vinyl-buffer'),
 gulp.task('build', [
   'clean', 
   'html', 
+  'css', 
   'lint', 
   'scripts', 
   'inject'
@@ -40,13 +41,16 @@ gulp.task('clean', () => {
  */
 gulp.task('html', () =>  gulp.src(config.srcFiles.html).pipe(gulp.dest(config.dirPaths.dev)));
 
+
 /*
  * inject
  */
 gulp.task('inject', ['scripts'], () => {
   const jsSource = gulp.src(path.join(config.dest.js,'index.js'), { read: false });
+  const cssSource = gulp.src(path.join(config.dest.css,'styles.css'), { read: false });
 
   return gulp.src(config.dest.html)
+    .pipe(plugins.inject(cssSource, config.injectOptions))
     .pipe(plugins.inject(jsSource, config.injectOptions))
     .pipe(gulp.dest(config.dirPaths.dev));
 }); 
@@ -58,6 +62,15 @@ gulp.task('lint', () => (
   gulp.src(config.srcFiles.js)
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
+));
+
+
+/*
+ * copy css
+ */
+gulp.task('css', () => (
+  gulp.src(config.srcFiles.css)
+    .pipe(gulp.dest(config.dest.css))
 ));
 
 /*
@@ -102,7 +115,6 @@ gulp.task('reload', (done) => {
  * watch
  */
 gulp.task('watch', () => {
-  // gulp.watch(config.srcFiles.html, () => runSequence('html', 'inject', 'reload'));
-  gulp.watch(config.srcFiles.js, () => runSequence('scripts', 'reload'));
+  gulp.watch(config.srcFiles.js, ['scripts', 'reload']);
 });
 

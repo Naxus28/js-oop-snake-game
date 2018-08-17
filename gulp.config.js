@@ -20,7 +20,8 @@ const dirPaths = {
  */
 const srcFiles = {
   html: path.join(dirPaths.src, 'index.html'),
-  js: path.join(dirPaths.src, 'js/**/*.js')
+  js: path.join(dirPaths.src, 'js/**/*.js'),
+  css: path.join(dirPaths.src, 'styles/**/*.css'),
 };
 
 /*
@@ -29,7 +30,8 @@ const srcFiles = {
  */
 const dest = {
   html: path.join(dirPaths.dev, 'index.html'),
-  js: path.join(dirPaths.dev, 'js')
+  js: path.join(dirPaths.dev, 'js'),
+  css: path.join(dirPaths.dev, 'styles'),
 };
 
 
