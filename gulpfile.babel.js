@@ -99,7 +99,6 @@ let browserSyncInit = serveDir => (
   })
 );
 
-
 // dev server
 gulp.task('serve', ['build', 'watch'], () => browserSyncInit(config.dirPaths.dev));
 

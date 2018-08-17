@@ -326,13 +326,12 @@ var Snake = function () {
 				this._draw(this.snake[0]);
 			} else {
 				this._setDirection(direction);
-
 				var head = this._getNewHead();
-				this._draw(head);
 
 				if (this.hasCollided(head)) {
 					this._setPosition({});
 				} else {
+					this._draw(head);
 					this._setPosition(head);
 				}
 			}
