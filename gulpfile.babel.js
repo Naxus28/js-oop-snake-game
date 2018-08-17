@@ -58,13 +58,13 @@ gulp.task('lint', () => (
   gulp.src(config.srcFiles.js)
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-))
+));
 
 /*
  * scripts
  */
 gulp.task('scripts', ['lint'], () => (
-  browserify(config.srcFiles.js)
+  browserify(config.browserifyCustomOpts)
     .transform('babelify', { presets: ['env'] }) 
     .bundle()
     .on('error', plugins.notify.onError(config.notifyConfig('JAVASCRIPT')))
@@ -73,7 +73,7 @@ gulp.task('scripts', ['lint'], () => (
     .pipe(plugins.sourcemaps.init({ loadMaps: true })) 
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest(config.dest.js))
-))
+));
 
 /*
  * serve
@@ -93,13 +93,16 @@ gulp.task('serve', ['build', 'watch'], () => browserSyncInit(config.dirPaths.dev
 /*
  * reload servers
  */
-gulp.task('reload', () => browserSync.reload()); 
+gulp.task('reload', (done) => {
+  browserSync.reload();
+  done();
+}); 
 
 /*
  * watch
  */
 gulp.task('watch', () => {
-  gulp.watch(config.srcFiles.html, () => runSequence('html', 'inject', 'reload'));
+  // gulp.watch(config.srcFiles.html, () => runSequence('html', 'inject', 'reload'));
   gulp.watch(config.srcFiles.js, () => runSequence('scripts', 'reload'));
 });
 

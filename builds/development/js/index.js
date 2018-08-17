@@ -1,44 +1,452 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-console.log('Game');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Canvas = function () {
+	function Canvas() {
+		var canvasId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'snake-game';
+		var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 600;
+		var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 600;
+
+		_classCallCheck(this, Canvas);
+
+		this.canvasId = canvasId;
+		this.width = width;
+		this.height = height;
+		this.canvas = this.createCanvas();
+	}
+
+	_createClass(Canvas, [{
+		key: 'createCanvas',
+		value: function createCanvas() {
+			var canvas = document.getElementById(this.canvasId);
+			canvas.height = this.height;
+			canvas.width = this.width;
+
+			return canvas;
+		}
+	}, {
+		key: 'getContext',
+		value: function getContext() {
+			if (!this.canvas.getContext) {
+				alert('Your browser doesn\'t support HTML5 Canvas.');
+				return;
+			} else {
+				return this.canvas.getContext('2d');
+			}
+		}
+
+		/**
+   * accessor and mutator methods
+   */
+
+	}, {
+		key: 'getCanvasId',
+		value: function getCanvasId() {
+			return this.canvasId;
+		}
+	}, {
+		key: 'setCanvasId',
+		value: function setCanvasId(canvasId) {
+			this.canvasId = canvasId;
+		}
+	}, {
+		key: 'getCanvas',
+		value: function getCanvas() {
+			return this.canvas;
+		}
+
+		/**
+   * @param {HTML Node} canvas element
+   */
+
+	}, {
+		key: 'setCanvas',
+		value: function setCanvas(canvas) {
+			this.canvas = canvas;
+		}
+	}, {
+		key: 'getWidth',
+		value: function getWidth() {
+			return this.width;
+		}
+	}, {
+		key: 'setWidth',
+		value: function setWidth(width) {
+			this.width = width;
+		}
+	}, {
+		key: 'getHeight',
+		value: function getHeight() {
+			return this.height;
+		}
+	}, {
+		key: 'setHeight',
+		value: function setHeight(height) {
+			this.height = height;
+		}
+	}]);
+
+	return Canvas;
+}();
+
+exports.default = Canvas;
 
 },{}],2:[function(require,module,exports){
 'use strict';
 
-console.log('KeyboardControllers');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Controllers = function () {
+	function Controllers(_ref) {
+		var _ref$controllers = _ref.controllers,
+		    controllers = _ref$controllers === undefined ? {
+			37: 'LEFT',
+			38: 'UP',
+			39: 'RIGHT',
+			40: 'DOWN'
+		} : _ref$controllers,
+		    initialPosition = _ref.initialPosition;
+
+		_classCallCheck(this, Controllers);
+
+		this.controllers = controllers;
+		this.direction = initialPosition; // initial snake direction
+	}
+
+	_createClass(Controllers, [{
+		key: 'getControllers',
+		value: function getControllers() {
+			return this.controllers;
+		}
+	}, {
+		key: 'setControllers',
+		value: function setControllers(controllers) {
+			this.controllers = controllers;
+		}
+	}, {
+		key: 'getDirection',
+		value: function getDirection() {
+			return this.direction;
+		}
+	}, {
+		key: 'keyboardListener',
+		value: function keyboardListener() {
+			var _this = this;
+
+			document.addEventListener('keydown', function (e) {
+				Object.entries(_this.controllers).forEach(function (_ref2) {
+					var _ref3 = _slicedToArray(_ref2, 2),
+					    controllerKey = _ref3[0],
+					    controllerDirection = _ref3[1];
+
+					if (e.keyCode === parseInt(controllerKey)) {
+						if (_this.direction === 'LEFT' && controllerDirection === 'RIGHT') {
+							_this.direction = 'LEFT';
+						} else if (_this.direction === 'RIGHT' && controllerDirection === 'LEFT') {
+							_this.direction = 'RIGHT';
+						} else if (_this.direction === 'UP' && controllerDirection === 'DOWN') {
+							_this.direction = 'UP';
+						} else if (_this.direction === 'DOWN' && controllerDirection === 'UP') {
+							_this.direction = 'DOWN';
+						} else {
+							_this.direction = controllerDirection;
+						}
+					}
+				});
+			});
+		}
+	}]);
+
+	return Controllers;
+}();
+
+exports.default = Controllers;
 
 },{}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
-console.log('Hello from Snake');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Food = function () {
+	function Food(canvas, ctx, boxSize, color) {
+		_classCallCheck(this, Food);
+
+		this.boxSize = boxSize;
+		this.canvas = canvas;
+		this.ctx = ctx;
+		this.color = color;
+		this.food;
+	}
+
+	_createClass(Food, [{
+		key: "create",
+		value: function create() {
+			var boxCountOnXAxis = this.canvas.width / this.boxSize;
+			var boxCountOnYAxis = this.canvas.height / this.boxSize;
+
+			var foodX = Math.floor(Math.random() * boxCountOnXAxis) * this.boxSize;
+			var foodY = Math.floor(Math.random() * boxCountOnYAxis) * this.boxSize;
+
+			this.food = { x: foodX, y: foodY };
+		}
+	}, {
+		key: "draw",
+		value: function draw() {
+			this.ctx.fillStyle = this.color;
+			this.ctx.fillRect(this.food.x, this.food.y, this.boxSize, this.boxSize);
+		}
+	}, {
+		key: "getPosition",
+		value: function getPosition() {
+			return this.food;
+		}
+	}]);
+
+	return Food;
+}();
+
+exports.default = Food;
 
 },{}],4:[function(require,module,exports){
-'use strict';
-
-console.log('Stage');
+"use strict";
 
 },{}],5:[function(require,module,exports){
 'use strict';
 
-var _Game = require('./game/Game');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-var _Game2 = _interopRequireDefault(_Game);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _KeyboardControllers = require('./game/KeyboardControllers');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _KeyboardControllers2 = _interopRequireDefault(_KeyboardControllers);
+var Snake = function () {
+	function Snake(_ref) {
+		var ctx = _ref.ctx,
+		    canvas = _ref.canvas,
+		    boxSize = _ref.boxSize,
+		    initialX = _ref.initialX,
+		    initialY = _ref.initialY,
+		    color = _ref.color;
+
+		_classCallCheck(this, Snake);
+
+		this.snake = [];
+
+		// set initial position
+		this.snake[0] = {
+			x: initialX * boxSize,
+			y: initialY * boxSize
+		};
+		this.ctx = ctx;
+		this.canvas = canvas;
+		this.boxSize = boxSize;
+		this.initialX = initialX;
+		this.initialY = initialY;
+		this.color = color;
+		this.direction;
+		this.position = this.snake[0];
+	}
+
+	_createClass(Snake, [{
+		key: 'getSnake',
+		value: function getSnake() {
+			return this.snake;
+		}
+	}, {
+		key: 'setSnakeOnCanvas',
+		value: function setSnakeOnCanvas() {
+			this.ctx.fillStyle = this.color;
+			this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
+		}
+	}, {
+		key: 'draw',
+		value: function draw(snakeX, snakeY) {
+			this.ctx.fillStyle = this.color;
+			this.ctx.fillRect(snakeX, snakeY, this.boxSize, this.boxSize);
+		}
+	}, {
+		key: 'setDirection',
+		value: function setDirection(direction) {
+			this.direction = direction;
+		}
+	}, {
+		key: 'hasCollided',
+		value: function hasCollided(snakeX, snakeY) {
+			return snakeX < 0 || snakeX + this.boxSize > this.canvas.width || snakeY < 0 || snakeY + this.boxSize > this.canvas.height;
+		}
+	}, {
+		key: 'eat',
+		value: function eat() {
+			var headX = this.snake[0].x;
+			var headY = this.snake[0].y;
+
+			if (this.direction === 'LEFT') {
+				headX -= this.boxSize;
+			} else if (this.direction === 'RIGHT') {
+				headX += this.boxSize;
+			} else if (this.direction === 'UP') {
+				headY -= this.boxSize;
+			} else if (this.direction === 'DOWN') {
+				headY += this.boxSize;
+			}
+
+			this.snake.unshift({ x: headX, y: headY });
+		}
+	}, {
+		key: 'getPosition',
+		value: function getPosition() {
+			return this.position;
+		}
+	}, {
+		key: 'setPosition',
+		value: function setPosition(position) {
+			this.position = position;
+		}
+	}, {
+		key: 'move',
+		value: function move(direction) {
+			this.setDirection(direction);
+			var newHeadX = void 0;
+			var newHeadY = void 0;
+
+			for (var i = 0; i < this.snake.length; i++) {
+				if (direction === 'LEFT') {
+					newHeadX = this.snake[0].x - this.boxSize;
+				} else if (direction === 'RIGHT') {
+					newHeadX = this.snake[0].x + this.boxSize;
+				} else if (direction === 'DOWN') {
+					newHeadY = this.snake[0].y + this.boxSize;
+				} else if (direction === 'UP') {
+					newHeadY = this.snake[0].y - this.boxSize;
+				}
+
+				console.log(newHeadX);
+				console.log(newHeadY);
+
+				this.ctx.fillStyle = this.color;
+				this.ctx.fillRect(20, 30, this.boxSize, this.boxSize);
+
+				// this.snake.pop();
+				this.snake.unshift({ x: 10 + i, y: 20 + i });
+				// this.draw(newHeadX, newHeadY);
+
+				if (this.hasCollided(newHeadX, newHeadY)) {
+					this.setPosition({});
+				} else {
+					this.setPosition({
+						x: newHeadX,
+						y: newHeadY
+					});
+				}
+			}
+			// this.draw();
+		}
+	}]);
+
+	return Snake;
+}();
+
+exports.default = Snake;
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+var _Controllers = require('./game/Controllers');
+
+var _Controllers2 = _interopRequireDefault(_Controllers);
+
+var _Food = require('./game/Food');
+
+var _Food2 = _interopRequireDefault(_Food);
 
 var _Snake = require('./game/Snake');
 
 var _Snake2 = _interopRequireDefault(_Snake);
 
-var _Stage = require('./game/Stage');
+var _Canvas = require('./game/Canvas');
 
-var _Stage2 = _interopRequireDefault(_Stage);
+var _Canvas2 = _interopRequireDefault(_Canvas);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./game/Game":1,"./game/KeyboardControllers":2,"./game/Snake":3,"./game/Stage":4}]},{},[5]);
+// import Game from './game/Game';
+var direction = void 0;
+var boxSize = 20;
+var game = setInterval(play, 120);
+
+/* CANVAS */
+var canvas = new _Canvas2.default();
+var ctx = canvas.getContext();
+
+/* CONTROLLERS */
+var controllers = new _Controllers2.default({ initialPosition: 'RIGHT' });
+
+controllers.keyboardListener();
+
+document.addEventListener('keydown', function () {
+	direction = controllers.getDirection();
+});
+
+/* SNAKE */
+var snake = new _Snake2.default({
+	ctx: ctx,
+	canvas: canvas,
+	boxSize: boxSize,
+	initialX: 0,
+	initialY: 15,
+	color: 'green',
+	game: game
+});
+
+snake.setSnakeOnCanvas();
+
+/* FOOD */
+var food = new _Food2.default(canvas, ctx, boxSize, 'red');
+food.create();
+
+/* PLAY */
+function play() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	food.draw();
+	snake.move(direction);
+	var foodPosition = food.getPosition();
+	var snakePosition = snake.getPosition();
+
+	if (Object.keys(snakePosition).length === 0) {
+		alert('Game Over!');
+		clearInterval(game);
+		location.reload();
+	} else if (snakePosition.x === foodPosition.x && snakePosition.y === foodPosition.y) {
+		food.create();
+		food.draw();
+		snake.eat();
+	}
+}
+
+},{"./game/Canvas":1,"./game/Controllers":2,"./game/Food":3,"./game/Snake":5}]},{},[1,2,3,4,5,6])
 
 //# sourceMappingURL=index.js.map

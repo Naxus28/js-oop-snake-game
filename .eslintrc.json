@@ -19,7 +19,7 @@
     "comma-spacing": ["warn", { "before": false, "after": true }],
     "computed-property-spacing": ["warn", "never"],
     "array-bracket-spacing": ["warn", "never"],
-    "indent": ["warn", 2, {"SwitchCase": 1, "VariableDeclarator": 2}],
+    "indent": ["warn", "tab"],
     "key-spacing": ["warn", {"beforeColon": false, "mode": "strict"}],
     "keyword-spacing": ["warn", { "before": true }],
     "max-depth": ["warn", 4],
