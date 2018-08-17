@@ -4,9 +4,9 @@ export default class Controllers {
 		38: 'UP',
 		39: 'RIGHT',
 		40: 'DOWN'
-	}, initialPosition }) {
+	}, initialDirection }) {
 		this.controllers = controllers;
-		this.direction = initialPosition;// initial snake direction
+		this.direction = initialDirection;// initial snake direction
 	}
 
 	getControllers() {

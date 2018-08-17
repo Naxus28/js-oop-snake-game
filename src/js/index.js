@@ -6,14 +6,14 @@ import Canvas from './game/Canvas';
 
 let direction;
 const boxSize = 20;
-const game = setInterval(play, 120);
+const game = setInterval(play, 100);
 
 /* CANVAS */
 const canvas = new Canvas();
 const ctx = canvas.getContext();
 
 /* CONTROLLERS */
-const controllers = new Controllers({ initialPosition: 'RIGHT' });
+const controllers = new Controllers({ initialDirection: 'RIGHT' });
 
 controllers.keyboardListener();
 
@@ -39,22 +39,33 @@ snake.setSnakeOnCanvas();
 const food = new Food(canvas, ctx, boxSize, 'red'); 
 food.create();
 
+
+const gameOver = () => {
+	alert('Game Over!');
+	clearInterval(game);
+	location.reload();
+};
+
 /* PLAY */
 function play() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	// draw food and get position
 	food.draw();
-	snake.move(direction);
 	const foodPosition = food.getPosition();
-	const snakePosition = snake.getPosition();
 
-	if (Object.keys(snakePosition).length === 0) {
-		alert('Game Over!');
-		clearInterval(game);
-		location.reload();
+	// move snake and get position
+	snake.move(direction);
+	const snakePosition = snake.getPosition();
+	const collided = Object.keys(snakePosition).length === 0;
+
+	// check next action
+	if (collided) {
+		gameOver();
 	} else if ((snakePosition.x === foodPosition.x && snakePosition.y === foodPosition.y)) {
 		food.create();
 		food.draw();
-		snake.eat();
+		snake.eat(); 
 	}
 }
 

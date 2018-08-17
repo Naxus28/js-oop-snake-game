@@ -121,12 +121,12 @@ var Controllers = function () {
 			39: 'RIGHT',
 			40: 'DOWN'
 		} : _ref$controllers,
-		    initialPosition = _ref.initialPosition;
+		    initialDirection = _ref.initialDirection;
 
 		_classCallCheck(this, Controllers);
 
 		this.controllers = controllers;
-		this.direction = initialPosition; // initial snake direction
+		this.direction = initialDirection; // initial snake direction
 	}
 
 	_createClass(Controllers, [{
@@ -284,9 +284,16 @@ var Snake = function () {
 		}
 	}, {
 		key: 'draw',
-		value: function draw(snakeX, snakeY) {
+		value: function draw(head) {
+			var _this = this;
+
+			this.snake.unshift(head);
+			this.snake.pop();
 			this.ctx.fillStyle = this.color;
-			this.ctx.fillRect(snakeX, snakeY, this.boxSize, this.boxSize);
+
+			this.snake.forEach(function (segment) {
+				_this.ctx.fillRect(segment.x, segment.y, _this.boxSize, _this.boxSize);
+			});
 		}
 	}, {
 		key: 'setDirection',
@@ -295,26 +302,13 @@ var Snake = function () {
 		}
 	}, {
 		key: 'hasCollided',
-		value: function hasCollided(snakeX, snakeY) {
-			return snakeX < 0 || snakeX + this.boxSize > this.canvas.width || snakeY < 0 || snakeY + this.boxSize > this.canvas.height;
+		value: function hasCollided(head) {
+			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
 		}
 	}, {
 		key: 'eat',
 		value: function eat() {
-			var headX = this.snake[0].x;
-			var headY = this.snake[0].y;
-
-			if (this.direction === 'LEFT') {
-				headX -= this.boxSize;
-			} else if (this.direction === 'RIGHT') {
-				headX += this.boxSize;
-			} else if (this.direction === 'UP') {
-				headY -= this.boxSize;
-			} else if (this.direction === 'DOWN') {
-				headY += this.boxSize;
-			}
-
-			this.snake.unshift({ x: headX, y: headY });
+			this.snake.unshift(this._getNewHead());
 		}
 	}, {
 		key: 'getPosition',
@@ -327,43 +321,39 @@ var Snake = function () {
 			this.position = position;
 		}
 	}, {
+		key: '_getNewHead',
+		value: function _getNewHead() {
+			var headX = this.snake[0].x;
+			var headY = this.snake[0].y;
+
+			if (this.direction === 'LEFT') {
+				headX -= this.boxSize;
+			} else if (this.direction === 'RIGHT') {
+				headX += this.boxSize;
+			} else if (this.direction === 'DOWN') {
+				headY += this.boxSize;
+			} else if (this.direction === 'UP') {
+				headY -= this.boxSize;
+			}
+
+			return { x: headX, y: headY };
+		}
+	}, {
 		key: 'move',
 		value: function move(direction) {
-			this.setDirection(direction);
-			var newHeadX = void 0;
-			var newHeadY = void 0;
+			if (!direction) {
+				this.draw(this.snake[0]);
+			} else {
+				this.setDirection(direction);
+				var head = this._getNewHead();
+				this.draw(head);
 
-			for (var i = 0; i < this.snake.length; i++) {
-				if (direction === 'LEFT') {
-					newHeadX = this.snake[0].x - this.boxSize;
-				} else if (direction === 'RIGHT') {
-					newHeadX = this.snake[0].x + this.boxSize;
-				} else if (direction === 'DOWN') {
-					newHeadY = this.snake[0].y + this.boxSize;
-				} else if (direction === 'UP') {
-					newHeadY = this.snake[0].y - this.boxSize;
-				}
-
-				console.log(newHeadX);
-				console.log(newHeadY);
-
-				this.ctx.fillStyle = this.color;
-				this.ctx.fillRect(20, 30, this.boxSize, this.boxSize);
-
-				// this.snake.pop();
-				this.snake.unshift({ x: 10 + i, y: 20 + i });
-				// this.draw(newHeadX, newHeadY);
-
-				if (this.hasCollided(newHeadX, newHeadY)) {
+				if (this.hasCollided(head)) {
 					this.setPosition({});
 				} else {
-					this.setPosition({
-						x: newHeadX,
-						y: newHeadY
-					});
+					this.setPosition(head);
 				}
 			}
-			// this.draw();
 		}
 	}]);
 
@@ -396,14 +386,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import Game from './game/Game';
 var direction = void 0;
 var boxSize = 20;
-var game = setInterval(play, 120);
+var game = setInterval(play, 100);
 
 /* CANVAS */
 var canvas = new _Canvas2.default();
 var ctx = canvas.getContext();
 
 /* CONTROLLERS */
-var controllers = new _Controllers2.default({ initialPosition: 'RIGHT' });
+var controllers = new _Controllers2.default({ initialDirection: 'RIGHT' });
 
 controllers.keyboardListener();
 
@@ -428,18 +418,28 @@ snake.setSnakeOnCanvas();
 var food = new _Food2.default(canvas, ctx, boxSize, 'red');
 food.create();
 
+var gameOver = function gameOver() {
+	alert('Game Over!');
+	clearInterval(game);
+	location.reload();
+};
+
 /* PLAY */
 function play() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	food.draw();
-	snake.move(direction);
-	var foodPosition = food.getPosition();
-	var snakePosition = snake.getPosition();
 
-	if (Object.keys(snakePosition).length === 0) {
-		alert('Game Over!');
-		clearInterval(game);
-		location.reload();
+	// draw food and get position
+	food.draw();
+	var foodPosition = food.getPosition();
+
+	// move snake and get position
+	snake.move(direction);
+	var snakePosition = snake.getPosition();
+	var collided = Object.keys(snakePosition).length === 0;
+
+	// check next action
+	if (collided) {
+		gameOver();
 	} else if (snakePosition.x === foodPosition.x && snakePosition.y === foodPosition.y) {
 		food.create();
 		food.draw();
