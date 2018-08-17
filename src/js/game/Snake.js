@@ -79,6 +79,7 @@ export default class Snake {
 			this.draw(this.snake[0]);
 		} else {
 			this.setDirection(direction);
+			
 			const head = this._getNewHead();
 			this.draw(head);
 

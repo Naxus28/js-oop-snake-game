@@ -345,6 +345,7 @@ var Snake = function () {
 				this.draw(this.snake[0]);
 			} else {
 				this.setDirection(direction);
+
 				var head = this._getNewHead();
 				this.draw(head);
 
