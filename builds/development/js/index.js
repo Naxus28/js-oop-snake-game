@@ -312,7 +312,12 @@ var Snake = function () {
 	}, {
 		key: 'hasCollided',
 		value: function hasCollided(head) {
-			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
+			var tail = this.snake.length > 1 && this.snake.slice(1);
+			var selfCollistion = tail && tail.findIndex(function (segment) {
+				return segment.x === head.x && segment.y === head.y;
+			}) !== -1;
+
+			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height || selfCollistion;
 		}
 	}, {
 		key: 'move',
