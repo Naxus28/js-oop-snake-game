@@ -1,5 +1,5 @@
 export default class Snake {
-	constructor({ ctx, canvas, boxSize, initialX, initialY, color }) {
+	constructor({ ctx, canvas, boxSize = 20, initialX, initialY, color = '#1F5226' }) {
 		this.snake = [];
 		
 		// set initial position
@@ -49,10 +49,9 @@ export default class Snake {
 	hasCollided(head) {
 		let tail = this.snake.length > 1 && this.snake.slice(1);
 		let selfCollistion = tail && tail.findIndex(segment => segment.x === head.x && segment.y === head.y) !== -1;
-
-		return (head.x < 0 || head.x + this.boxSize > this.canvas.width)
-			|| (head.y < 0 || head.y + this.boxSize > this.canvas.height)
-			|| selfCollistion;
+		let borderCollision = (head.x < 0 || head.x + this.boxSize > this.canvas.width) || (head.y < 0 || head.y + this.boxSize > this.canvas.height);
+		
+		return borderCollision || selfCollistion;
 	}
 
 	move(direction) {

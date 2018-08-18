@@ -5,7 +5,6 @@ import Snake from './game/Snake';
 import Canvas from './game/Canvas';
 
 let direction;
-const boxSize = 20;
 const game = setInterval(play, 100);
 
 /* CANVAS */
@@ -26,17 +25,15 @@ document.addEventListener('keydown', () => {
 const snake = new Snake({ 
 	ctx, 
 	canvas, 
-	boxSize, 
 	initialX: 0, 
 	initialY: 15, 
-	color: 'green', 
 	game
 });
 
 snake.setSnakeOnCanvas();
 
 /* FOOD */
-const food = new Food(canvas, ctx, boxSize, 'red'); 
+const food = new Food({ canvas, ctx }); 
 food.create();
 
 

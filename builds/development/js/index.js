@@ -29,6 +29,7 @@ var Canvas = function () {
 			var canvas = document.getElementById(this.canvasId);
 			canvas.height = this.height;
 			canvas.width = this.width;
+
 			return canvas;
 		}
 	}, {
@@ -169,7 +170,7 @@ var Controllers = function () {
 exports.default = Controllers;
 
 },{}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -180,7 +181,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Food = function () {
-	function Food(canvas, ctx, boxSize, color) {
+	function Food(_ref) {
+		var canvas = _ref.canvas,
+		    ctx = _ref.ctx,
+		    _ref$boxSize = _ref.boxSize,
+		    boxSize = _ref$boxSize === undefined ? 20 : _ref$boxSize,
+		    _ref$color = _ref.color,
+		    color = _ref$color === undefined ? 'red' : _ref$color;
+
 		_classCallCheck(this, Food);
 
 		this.boxSize = boxSize;
@@ -191,17 +199,17 @@ var Food = function () {
 	}
 
 	_createClass(Food, [{
-		key: "getColor",
+		key: 'getColor',
 		value: function getColor() {
 			return this.color;
 		}
 	}, {
-		key: "setColor",
+		key: 'setColor',
 		value: function setColor(color) {
 			this.color = color;
 		}
 	}, {
-		key: "create",
+		key: 'create',
 		value: function create() {
 			var boxCountOnXAxis = this.canvas.width / this.boxSize;
 			var boxCountOnYAxis = this.canvas.height / this.boxSize;
@@ -212,13 +220,13 @@ var Food = function () {
 			this.food = { x: foodX, y: foodY };
 		}
 	}, {
-		key: "draw",
+		key: 'draw',
 		value: function draw() {
 			this.ctx.fillStyle = this.color;
 			this.ctx.fillRect(this.food.x, this.food.y, this.boxSize, this.boxSize);
 		}
 	}, {
-		key: "getPosition",
+		key: 'getPosition',
 		value: function getPosition() {
 			return this.food;
 		}
@@ -247,10 +255,12 @@ var Snake = function () {
 	function Snake(_ref) {
 		var ctx = _ref.ctx,
 		    canvas = _ref.canvas,
-		    boxSize = _ref.boxSize,
+		    _ref$boxSize = _ref.boxSize,
+		    boxSize = _ref$boxSize === undefined ? 20 : _ref$boxSize,
 		    initialX = _ref.initialX,
 		    initialY = _ref.initialY,
-		    color = _ref.color;
+		    _ref$color = _ref.color,
+		    color = _ref$color === undefined ? '#1F5226' : _ref$color;
 
 		_classCallCheck(this, Snake);
 
@@ -316,8 +326,9 @@ var Snake = function () {
 			var selfCollistion = tail && tail.findIndex(function (segment) {
 				return segment.x === head.x && segment.y === head.y;
 			}) !== -1;
+			var borderCollision = head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
 
-			return head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height || selfCollistion;
+			return borderCollision || selfCollistion;
 		}
 	}, {
 		key: 'move',
@@ -416,7 +427,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import Game from './game/Game';
 var direction = void 0;
-var boxSize = 20;
 var game = setInterval(play, 100);
 
 /* CANVAS */
@@ -436,17 +446,15 @@ document.addEventListener('keydown', function () {
 var snake = new _Snake2.default({
 	ctx: ctx,
 	canvas: canvas,
-	boxSize: boxSize,
 	initialX: 0,
 	initialY: 15,
-	color: 'green',
 	game: game
 });
 
 snake.setSnakeOnCanvas();
 
 /* FOOD */
-var food = new _Food2.default(canvas, ctx, boxSize, 'red');
+var food = new _Food2.default({ canvas: canvas, ctx: ctx });
 food.create();
 
 var gameOver = function gameOver() {

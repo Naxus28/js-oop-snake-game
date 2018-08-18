@@ -1,0 +1,12 @@
+ * { 
+ 	padding: 0; 
+ 	margin: 0; 
+ }
+ body {
+ 	background: beige;
+ }
+ canvas { 
+ 	background: #BFD19D;
+ 	display: block; 
+ 	margin: 40 auto; 
+ }

@@ -10,6 +10,7 @@ export default class Canvas {
 		const canvas = document.getElementById(this.canvasId);
 		canvas.height = this.height;
 		canvas.width = this.width;
+		
 		return canvas;
 	}
 

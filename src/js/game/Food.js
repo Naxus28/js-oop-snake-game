@@ -1,5 +1,5 @@
 export default class Food {
-	constructor(canvas, ctx, boxSize, color) {
+	constructor({ canvas, ctx, boxSize = 20, color = 'red' }) {
 		this.boxSize = boxSize;
 		this.canvas = canvas;
 		this.ctx = ctx;

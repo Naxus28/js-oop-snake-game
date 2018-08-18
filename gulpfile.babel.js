@@ -115,5 +115,6 @@ gulp.task('reload', (done) => {
  */
 gulp.task('watch', () => {
   gulp.watch(config.srcFiles.js, ['scripts', 'reload']);
+  gulp.watch(config.srcFiles.css, ['css', 'reload']);
 });
 
