@@ -4,7 +4,7 @@
   "description": "A JavaScript Object Oriented 'Snake' Game",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bower install && gulp serve"
+    "postinstall": "gulp serve"
   },
   "author": "Gabriel Ferraz",
   "devDependencies": {
