@@ -1,5 +1,5 @@
 export default class Snake {
-	constructor({ ctx, canvas, boxSize = 20, initialX, initialY, color = '#1F5226' }) {
+	constructor({ ctx, canvas, boxSize, initialX, initialY, color = '#1F5226' }) {
 		this.snake = [];
 		
 		// set initial position
@@ -14,7 +14,7 @@ export default class Snake {
 		this.initialY = initialY;
 		this.color = color;
 		this.direction;
-		this.position = this.snake[0];
+		this.position = this.snake[0]; // default to initial position
 	}
 
 	/* public methods */
@@ -48,10 +48,10 @@ export default class Snake {
 
 	hasCollided(head) {
 		let tail = this.snake.length > 1 && this.snake.slice(1);
-		let selfCollistion = tail && tail.findIndex(segment => segment.x === head.x && segment.y === head.y) !== -1;
+		let selfCollision = tail && tail.findIndex(segment => segment.x === head.x && segment.y === head.y) !== -1;
 		let borderCollision = (head.x < 0 || head.x + this.boxSize > this.canvas.width) || (head.y < 0 || head.y + this.boxSize > this.canvas.height);
 		
-		return borderCollision || selfCollistion;
+		return borderCollision || selfCollision;
 	}
 
 	move(direction) {
@@ -70,9 +70,9 @@ export default class Snake {
 		}
 	}
 
-	setSnakeOnCanvas() {
+	setSnakeInitialPosition() {
 		this.ctx.fillStyle = this.color;
-		this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
+		this.ctx.fillRect(this.initialX * this.boxSize, this.initialY * this.boxSize, this.boxSize, this.boxSize);
 	}
 
 

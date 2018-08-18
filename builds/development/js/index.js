@@ -184,8 +184,7 @@ var Food = function () {
 	function Food(_ref) {
 		var canvas = _ref.canvas,
 		    ctx = _ref.ctx,
-		    _ref$boxSize = _ref.boxSize,
-		    boxSize = _ref$boxSize === undefined ? 20 : _ref$boxSize,
+		    boxSize = _ref.boxSize,
 		    _ref$color = _ref.color,
 		    color = _ref$color === undefined ? 'red' : _ref$color;
 
@@ -255,8 +254,7 @@ var Snake = function () {
 	function Snake(_ref) {
 		var ctx = _ref.ctx,
 		    canvas = _ref.canvas,
-		    _ref$boxSize = _ref.boxSize,
-		    boxSize = _ref$boxSize === undefined ? 20 : _ref$boxSize,
+		    boxSize = _ref.boxSize,
 		    initialX = _ref.initialX,
 		    initialY = _ref.initialY,
 		    _ref$color = _ref.color,
@@ -278,7 +276,7 @@ var Snake = function () {
 		this.initialY = initialY;
 		this.color = color;
 		this.direction;
-		this.position = this.snake[0];
+		this.position = this.snake[0]; // default to initial position
 	}
 
 	/* public methods */
@@ -323,12 +321,12 @@ var Snake = function () {
 		key: 'hasCollided',
 		value: function hasCollided(head) {
 			var tail = this.snake.length > 1 && this.snake.slice(1);
-			var selfCollistion = tail && tail.findIndex(function (segment) {
+			var selfCollision = tail && tail.findIndex(function (segment) {
 				return segment.x === head.x && segment.y === head.y;
 			}) !== -1;
 			var borderCollision = head.x < 0 || head.x + this.boxSize > this.canvas.width || head.y < 0 || head.y + this.boxSize > this.canvas.height;
 
-			return borderCollision || selfCollistion;
+			return borderCollision || selfCollision;
 		}
 	}, {
 		key: 'move',
@@ -348,10 +346,10 @@ var Snake = function () {
 			}
 		}
 	}, {
-		key: 'setSnakeOnCanvas',
-		value: function setSnakeOnCanvas() {
+		key: 'setSnakeInitialPosition',
+		value: function setSnakeInitialPosition() {
 			this.ctx.fillStyle = this.color;
-			this.ctx.fillRect(this.initialX, this.initialY * this.boxSize, this.boxSize, this.boxSize);
+			this.ctx.fillRect(this.initialX * this.boxSize, this.initialY * this.boxSize, this.boxSize, this.boxSize);
 		}
 
 		/* private methods */
@@ -425,9 +423,8 @@ var _Canvas2 = _interopRequireDefault(_Canvas);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import Game from './game/Game';
 var direction = void 0;
-var game = setInterval(play, 100);
+var boxSize = 20;
 
 /* CANVAS */
 var canvas = new _Canvas2.default();
@@ -448,13 +445,14 @@ var snake = new _Snake2.default({
 	canvas: canvas,
 	initialX: 0,
 	initialY: 15,
+	boxSize: boxSize,
 	game: game
 });
 
-snake.setSnakeOnCanvas();
+snake.setSnakeInitialPosition();
 
 /* FOOD */
-var food = new _Food2.default({ canvas: canvas, ctx: ctx });
+var food = new _Food2.default({ canvas: canvas, boxSize: boxSize, ctx: ctx });
 food.create();
 
 var gameOver = function gameOver() {
@@ -462,6 +460,8 @@ var gameOver = function gameOver() {
 	clearInterval(game);
 	location.reload();
 };
+
+var game = setInterval(play, 100);
 
 /* PLAY */
 function play() {

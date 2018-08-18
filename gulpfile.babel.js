@@ -105,7 +105,7 @@ gulp.task('serve', ['build', 'watch'], () => browserSyncInit(config.dirPaths.dev
 /*
  * reload servers
  */
-gulp.task('reload', (done) => {
+gulp.task('reload', done => {
   browserSync.reload();
   done();
 }); 

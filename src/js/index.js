@@ -1,11 +1,10 @@
 import Controllers from './game/Controllers';
 import Food from './game/Food';
-// import Game from './game/Game';
 import Snake from './game/Snake';
 import Canvas from './game/Canvas';
 
 let direction;
-const game = setInterval(play, 100);
+const boxSize = 20;
 
 /* CANVAS */
 const canvas = new Canvas();
@@ -20,20 +19,20 @@ document.addEventListener('keydown', () => {
 	direction = controllers.getDirection();
 });
 
-
 /* SNAKE */
 const snake = new Snake({ 
 	ctx, 
 	canvas, 
 	initialX: 0, 
 	initialY: 15, 
+	boxSize,
 	game
 });
 
-snake.setSnakeOnCanvas();
+snake.setSnakeInitialPosition();
 
 /* FOOD */
-const food = new Food({ canvas, ctx }); 
+const food = new Food({ canvas, boxSize, ctx }); 
 food.create();
 
 
@@ -42,6 +41,8 @@ const gameOver = () => {
 	clearInterval(game);
 	location.reload();
 };
+
+const game = setInterval(play, 100);
 
 /* PLAY */
 function play() {
