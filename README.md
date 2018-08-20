@@ -52,6 +52,8 @@ The first step would be review the code and look for places to improve patterns 
 
 4. Make sure classes have all getters and setters they should have.
 
+5. Currently the snake collides if the food displays on the corner. This edge case needs to be handled. The easiest solution would be to prevent the food from displaying on the corner. However this would interfere with the random nature of the food position on the Canvas. A more involved implementation would be to add a new piece to the tail (instead of to the head like I have in the current implementation) when the snake eats the food--it also seems more "natural" that the tail should grow instead of the head. I imagine that growing the tail would require keeping track of the which direction the it is moving, which would require comparing the tail's previous's and current's x and y positions (where current becomes previous every time the snake moves). If I had to recreate the `eat` function, the steps listed above would be my first attempt at it.
+
 
 **UI/UX(the game itself)**
 

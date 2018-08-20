@@ -60,11 +60,12 @@ export default class Snake {
 		} else {
 			this._setDirection(direction);
 			const head = this._getNewHead();
-
+			this._draw(head);
+			
 			if (this.hasCollided(head)) {
 				this._setPosition({});
 			} else {
-				this._draw(head);
+				
 				this._setPosition(head);
 			}
 		}

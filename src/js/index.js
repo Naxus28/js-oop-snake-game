@@ -61,9 +61,9 @@ function play() {
 	if (collided) {
 		gameOver();
 	} else if ((snakePosition.x === foodPosition.x && snakePosition.y === foodPosition.y)) {
+		snake.eat(); 
 		food.create();
 		food.draw();
-		snake.eat(); 
 	}
 }
 

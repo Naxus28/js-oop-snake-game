@@ -332,11 +332,12 @@ var Snake = function () {
 			} else {
 				this._setDirection(direction);
 				var head = this._getNewHead();
+				this._draw(head);
 
 				if (this.hasCollided(head)) {
 					this._setPosition({});
 				} else {
-					this._draw(head);
+
 					this._setPosition(head);
 				}
 			}
@@ -476,9 +477,9 @@ function play() {
 	if (collided) {
 		gameOver();
 	} else if (snakePosition.x === foodPosition.x && snakePosition.y === foodPosition.y) {
+		snake.eat();
 		food.create();
 		food.draw();
-		snake.eat();
 	}
 }
 
