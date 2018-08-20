@@ -58,7 +58,7 @@ The first step would be to review the code and look for places to improve patter
 
 ```javascript
 eat() {
-	let currentTail = this.snake[this.snake.length-1];
+	const currentTail = this.snake[this.snake.length-1];
 	let tailX;
 	let tailY;
 
