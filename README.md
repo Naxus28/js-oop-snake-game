@@ -29,7 +29,7 @@ It took me about 3.6 hrs to write the core code of this game (not including the 
 
 **Implementation**
 
-As far as the code implementation, I took an OO approach because: 
+I took an OO approach because: 
 
 1. I believe OOP is the best way to represent "real life" objects, making it very suitable for writing a game.
 
