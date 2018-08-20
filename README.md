@@ -23,7 +23,7 @@ It took me about 3.6 hrs to write the core code of this game (not including the 
 
 2. Once I became more comfortable with Canvas, I took some time to think about how I would implement the actual code. Most tasks seemed reasonably simple to implement such as drawing the canvas, drawing food in random positions on the Canvas, and listening to keyboard events that controlled the snake. The most challenging piece of functionality was to make the snake move properly, which took me some time to figure out.
 
-3. The third step in the "pre coding" stage was to implement some gulp tasks that would ease development and allow me to load javascript modules (I adapted tasks that I had already written for previous projects). That also included installing the necessary npm packages and copying over an `.eslintrc.json` file and a `.gitignore` file that I have prepared for frontend projects.
+3. The third step in the "pre coding" stage was to implement some gulp tasks that would ease development and allow me to load javascript modules (I adapted tasks that I had already written for previous projects). This step also included installing the necessary npm packages and copying over an `.eslintrc.json` file and a `.gitignore` file that I have prepared for frontend projects.
 
 
 
