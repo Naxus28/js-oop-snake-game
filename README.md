@@ -95,6 +95,7 @@ move(direction) {
 
 getTailDirection(currentTailPosition) {
 	let tailDirection = '';
+	
 	if (this.previousTailPosition.x < currentTailPosition.x) {
 		this.tailDirection = 'RIGHT';
 	} else if (this.previousTailPosition.x > currentTailPosition.x) {
