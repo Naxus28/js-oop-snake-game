@@ -52,7 +52,7 @@ The first step would be review the code and look for places to improve patterns 
 
 4. Make sure classes have all getters and setters they should have.
 
-5. Currently the snake collides if the food displays on the corner. I would handle this edge case by adding a new piece to the tail (instead of to the head like I have in the current implementation) when the snake eats the food--it also seems more "natural" that the tail should grow instead of the head. Growing the tail would require keeping track of which direction the it is moving, which would require comparing the tail's previous's and current's x and y positions (where `this.snake[this.snake.length-1]` is set to `this.previousTailPosition` every time the snake moves). This would be the code for such an implementation:
+5. Currently the snake collides if the food displays on the corner. I would handle this edge case by adding a new piece to the tail (instead of to the head like I have in the current implementation) when the snake eats the food--it also seems more "natural" that the tail should grow instead of the head. Growing the tail would require keeping track of which direction it is moving, which would require comparing the tail's previous's and current's x and y positions (where `this.snake[this.snake.length-1]` is set to `this.previousTailPosition` every time the snake moves). This would be the code for such an implementation:
 
 ```javascript
 eat() {
