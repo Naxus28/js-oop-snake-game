@@ -75,7 +75,7 @@ The first step would be review the code and look for places to improve patterns 
 
 9. Implement "score" and "lives" as well as different phases where some kind of "difficulty variant" is introduced such as obstacles, increased speed, predators, etc.
 
-10. Implement time limit and minimum score to pass a phase. Users play a phase until they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If the user is doing well, rewarded them with food that is worth more points to help them complete a phase. 
+10. Implement time limit and minimum score to pass a phase. Users play a phase until they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If a user is doing well, they are rewarded with food that is worth more points to help them complete a phase. 
 
 11. Implement "bonus" phase where more than one piece of food is offered at the same time. 
 
