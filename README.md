@@ -122,7 +122,7 @@ getTailDirection(currentTailPosition) {
 
 3. Provide users with directions on how to play the game (how to start a game, goals, rules, etc). 
 
-4. Implement a nicer "game over" UI (as opposed to an alert box). 
+4. Implement a nicer "game over" UI (as opposed to the alert box). 
 
 5. Improve the look of the snake (make it look more like a real snake).
 
