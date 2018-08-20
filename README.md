@@ -63,7 +63,7 @@ The first step would be review the code and look for places to improve patterns 
 
 3. Provide users with directions on how to play the game (like how to start a game). 
 
-4. Implement a nicer game UI (as opposed to an alert box). 
+4. Implement a nicer "game over" UI (as opposed to an alert box). 
 
 5. Improve the look of the snake (make it look like a real snake).
 
