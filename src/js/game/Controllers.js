@@ -23,22 +23,23 @@ export default class Controllers {
 
 	keyboardListener() {
 		document.addEventListener('keydown', e => {
-			Object.entries(this.controllers)
-				.forEach(([controllerKey, controllerDirection]) => {
-					if (e.keyCode === parseInt(controllerKey)) {
-						if (this.direction === 'LEFT' && controllerDirection === 'RIGHT') {
-							this.direction = 'LEFT';
-						} else if (this.direction === 'RIGHT' && controllerDirection === 'LEFT') {
-							this.direction = 'RIGHT';
-						}	else if (this.direction === 'UP' && controllerDirection === 'DOWN') {
-							this.direction = 'UP';
-						} else if (this.direction === 'DOWN' && controllerDirection === 'UP') {
-							this.direction = 'DOWN';
-						} else {
-							this.direction = controllerDirection;
-						}
+			for (let key in this.controllers) {
+				let controllerDirection = this.controllers[key];
+				console.log(typeof key);
+				if (e.keyCode === parseInt(key)) {
+					if (this.direction === 'LEFT' && controllerDirection === 'RIGHT') {
+						this.direction = 'LEFT';
+					} else if (this.direction === 'RIGHT' && controllerDirection === 'LEFT') {
+						this.direction = 'RIGHT';
+					}	else if (this.direction === 'UP' && controllerDirection === 'DOWN') {
+						this.direction = 'UP';
+					} else if (this.direction === 'DOWN' && controllerDirection === 'UP') {
+						this.direction = 'DOWN';
+					} else {
+						this.direction = controllerDirection;
 					}
-				});
+				}
+			}
 		});
 	}
 }

@@ -96,7 +96,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -141,12 +141,10 @@ var Controllers = function () {
 			var _this = this;
 
 			document.addEventListener('keydown', function (e) {
-				Object.entries(_this.controllers).forEach(function (_ref2) {
-					var _ref3 = _slicedToArray(_ref2, 2),
-					    controllerKey = _ref3[0],
-					    controllerDirection = _ref3[1];
-
-					if (e.keyCode === parseInt(controllerKey)) {
+				for (var key in _this.controllers) {
+					var controllerDirection = _this.controllers[key];
+					console.log(typeof key === 'undefined' ? 'undefined' : _typeof(key));
+					if (e.keyCode === parseInt(key)) {
 						if (_this.direction === 'LEFT' && controllerDirection === 'RIGHT') {
 							_this.direction = 'LEFT';
 						} else if (_this.direction === 'RIGHT' && controllerDirection === 'LEFT') {
@@ -159,7 +157,7 @@ var Controllers = function () {
 							_this.direction = controllerDirection;
 						}
 					}
-				});
+				}
 			});
 		}
 	}]);
