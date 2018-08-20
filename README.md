@@ -15,7 +15,7 @@ The classic snake game written in Javascript and HTML5 Canvas.
 
 ## Foreword
 
-It took me about 3.7 hrs to write the core code of this game (not including the time to set up gulp tasks). At the 3hr mark I had most of the code working, except that the snake was moving as a block (the whole body moving to the same side at once). I understand the instructions stated I should take 3hrs to complete the assessment but I knew I was close to getting the code to work so I took some extra time. I understand I may be penalized for it.
+It took me about 3.6 hrs to write the core code of this game (not including the time to set up gulp tasks). At the 3hr mark I had most of the code working, except that the snake was moving as a block (the whole body moving to the same side at once). I understand the instructions stated I should take 3hrs to complete the assessment but I knew I was close to getting the code to work so I took some extra time. I understand I may be penalized for it.
 
 **Preparation Steps**
 
