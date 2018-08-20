@@ -61,7 +61,7 @@ The first step would be review the code and look for places to improve patterns 
 
 3. Improve the UI by refining the color pallete. 
 
-3. Implement some directions before the user starts to play the game. 
+3. Provide users with directions on how to play the game (like how to start a game). 
 
 4. Implement a nicer game UI (as opposed to an alert box). 
 
