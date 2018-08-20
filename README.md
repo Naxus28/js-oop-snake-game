@@ -19,7 +19,7 @@ It took me about 3.7 hrs to write the core code of this game (not including the 
 
 **Preparation Steps**
 
-1. Although I had written a little race game back in 2013 when I first learned javascript I had forgotten almost everything about the Canvas API. My first step toward writting the snake game was to become more familiar with Canvas through the Mozilla Canvas tutorial and the Mozilla documentation about Canvas. 
+1. Although I had written a little Canvas race game back in 2013 when I first learned javascript I had forgotten almost everything about the Canvas API. My first step toward writting the snake game was to become more familiar with Canvas through the Mozilla Canvas tutorial and the Mozilla documentation about Canvas. 
 
 2. Once I became more comfortable with Canvas, I took some time to think about the problems posed by the snake game d possible code implementations. Most tasks seemed reasonably simple to implement such as drawing the canvas, drawing food in random positions on the Canvas, and listening to keyboard events that controlled the snake. The most challenging piece of functionality was to make the snake move properly, which took me some time to figure out.
 
