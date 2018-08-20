@@ -101,15 +101,9 @@ To run this project you need the following software installed on your system:
 
 ### Installation
 
-Open a terminal window and:
+Once download a  copy of this project to your machine, open a terminal window and:
 
 ```bash
-$ cd ~/Sites #or wherever you keep your projects
-
-$ git clone https://github.com/Naxus28/js-oop-snake-game.git
-
-$ cd js-oop-snake-game
-
 $ npm install #npm postinstall will serve /builds/development on port 3000 (http://localhost:3000)
 ```
 
