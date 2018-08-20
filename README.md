@@ -6,11 +6,11 @@ The classic snake game written in Javascript and HTML5 Canvas.
 
 ## Index
 
-1. Foreword
+1. [Foreword](https://github.com/Naxus28/js-oop-snake-game#foreword) 
 
-2. Next Steps
+2. [Next Steps](https://github.com/Naxus28/js-oop-snake-game#next-steps)  
 
-3. Getting Started
+3. [Getting Started](https://github.com/Naxus28/js-oop-snake-game#next-steps)  
 
 
 ## Foreword
