@@ -44,7 +44,7 @@ I took an OO approach because:
 
 The first step would be to review the code and look for places to improve patterns before writting any new code. Below is a list of improvements I believe could be made on the current code:  
 
-1. Snake Class/index.js: instead of passing `initialX` and `initialY` and calculating the inital position in the Snake class, the code could pass the initial position straight from the entry point file, which would make clearer what the initial position is without having to dig into the snake class. 
+1. Snake Class/index.js: instead of passing `initialX` and `initialY` and calculating the inital position in the Snake class, the initial position code could be passed straight from the entry point file, which would make clearer what the initial position is without having to dig into the Snake class. 
 
 2. I would like to have a Game class that handles some of the functionality currently on index.js. I don't know exactly what state and methods that class would be hold but I would like it to controll at least the start and end of a game. 
 
