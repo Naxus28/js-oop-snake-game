@@ -61,21 +61,25 @@ The first step would be review the code and look for places to improve patterns 
 
 3. Improve the UI by refining the color pallete. 
 
-4. Improve the look of the snake (make it look like a real snake).
+3. Implement some directions before the user starts to play the game. 
 
-5. Implementation of arrays of images that represent real food. These arrays would have such taxonomies as "animals", "fruits", "sweets", etc. These "foods" would bring more diversity to the game as well as they would allow for a richer scoring system. i.e. an apple may be worth 10 points while a pie may be worth 50 points, and so on. 
+4. Implement a nicer game UI (as opposed to an alert box). 
 
-6. Allow user to choose different snake colors and scenery such as forest, mountain, city, countryside, beach, etc. The food would match the chosen scenary (i.e. animals and fruits in the forest, fish and sea animals at the beach, etc).
+5. Improve the look of the snake (make it look like a real snake).
 
-7. Implementation of sounds for movements, collision, and eating. 
+6. Implement arrays of images that represent real food. These arrays would have such taxonomies as "animals", "fruits", "sweets", etc. These "foods" would bring more diversity to the game as well as they would allow for a richer scoring system. i.e. an apple may be worth 10 points while a pie may be worth 50 points, and so on. 
 
-8. Implement "score" and "lives" as well as different phases where some kind of "difficulty variant" is introduced such as obstacles, increased speed, predators, etc.
+7. Allow user to choose different snake colors and scenery such as forest, mountain, city, countryside, beach, etc. The food would match the chosen scenary (i.e. animals and fruits in the forest, fish and sea animals at the beach, etc).
 
-9. Implement time limit and minimum score to pass a phase. Users play a phase until they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If the user is doing well, rewarded them with food that is worth more points to help them complete a phase. 
+8. Implement sounds for movements, collision, and eating. 
 
-10. Implement "bonus" phase where more than one piece of food is offered at the same time. 
+9. Implement "score" and "lives" as well as different phases where some kind of "difficulty variant" is introduced such as obstacles, increased speed, predators, etc.
 
-11. Implement signup/login and "largest score" so different users can see how they are doing in relation to one another. 
+10. Implement time limit and minimum score to pass a phase. Users play a phase until they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If the user is doing well, rewarded them with food that is worth more points to help them complete a phase. 
+
+11. Implement "bonus" phase where more than one piece of food is offered at the same time. 
+
+12. Implement signup/login and "largest score" so different users can see how well they are doing in relation to one another. 
 
 
 
