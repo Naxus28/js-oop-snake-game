@@ -134,7 +134,7 @@ getTailDirection(currentTailPosition) {
 
 9. Implement "score" and "lives" as well as different phases where some kind of "difficulty variant" is introduced such as obstacles, increased speed, predators, etc.
 
-10. Implement time limit and minimum score to pass a phase. Users pass a phase if they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If a user is doing well, they are rewarded with food that is worth more points to help them complete a phase. 
+10. Implement time limit and minimum score to pass a phase. Users pass a phase if they achieve the minimum score established for that phase within the time limit. For every failed attempt they lose a life and have to play the phase again. If a user is doing well, they are rewarded with food that is worth more points to help them complete a phase. 
 
 11. Implement "bonus" phases where more than one piece of food is offered at the same time. 
 
