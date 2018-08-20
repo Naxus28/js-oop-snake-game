@@ -15,7 +15,7 @@ The classic snake game written in Javascript and HTML5 Canvas.
 
 ## Foreword
 
-It took me about 3.75 hrs to write the core code of this game (not including the time to set up gulp tasks). At the 3hr mark I had most of the code working, except that the snake was moving as a block (the whole body moving to the same side at once). I understand the instructions stated I should take 3hrs to complete the assessment but I knew I was close to getting the code to work so I took some extra time. I understand I may be penalized for it.
+It took me about 3.7 hrs to write the core code of this game (not including the time to set up gulp tasks). At the 3hr mark I had most of the code working, except that the snake was moving as a block (the whole body moving to the same side at once). I understand the instructions stated I should take 3hrs to complete the assessment but I knew I was close to getting the code to work so I took some extra time. I understand I may be penalized for it.
 
 **Preparation Steps**
 
@@ -28,7 +28,6 @@ It took me about 3.75 hrs to write the core code of this game (not including the
 
 
 **Implementation**
-
 
 As far as the code implementation, I took an OO approach because: 
 
@@ -49,7 +48,9 @@ The first step would be review the code and look for places to improve patterns 
 
 2. I would like to have a Game class that handles some of the functionality currently on index.js. I don't know exactly what state and methods that class would be hold but I would like it to controll at least the start and end of a game. 
 
-3. Make sure classes have all getters and setters they should have.
+3. Pehaps find a better way to start the game without having two event listeners on "keydown".
+
+4. Make sure classes have all getters and setters they should have.
 
 
 **UI/UX(the game itself)**
