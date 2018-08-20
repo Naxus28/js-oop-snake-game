@@ -25,7 +25,7 @@ export default class Controllers {
 		document.addEventListener('keydown', e => {
 			for (let key in this.controllers) {
 				let controllerDirection = this.controllers[key];
-				console.log(typeof key);
+
 				if (e.keyCode === parseInt(key)) {
 					if (this.direction === 'LEFT' && controllerDirection === 'RIGHT') {
 						this.direction = 'LEFT';
