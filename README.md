@@ -95,7 +95,7 @@ move(direction) {
 
 getTailDirection(currentTailPosition) {
 	let tailDirection = '';
-	
+
 	if (this.previousTailPosition.x < currentTailPosition.x) {
 		this.tailDirection = 'RIGHT';
 	} else if (this.previousTailPosition.x > currentTailPosition.x) {
@@ -120,7 +120,7 @@ getTailDirection(currentTailPosition) {
 
 3. Improve the UI by refining the color pallete. 
 
-3. Provide users with directions on how to play the game (like how to start a game). 
+3. Provide users with directions on how to play the game (how to start a game, goals, rules, etc). 
 
 4. Implement a nicer "game over" UI (as opposed to an alert box). 
 
