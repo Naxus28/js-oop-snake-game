@@ -54,7 +54,7 @@ The first step would be to review the code and look for places to improve patter
 
 5. Prevent new food from displaying under the snake's tail.
 
-6. Currently the snake collides if the food displays on the corner. I would handle this edge case by changing the current code  so that a new segment is added to the tail (instead of to the head like I have in the current implementation) when the snake eats the food. It also seems more "natural" that the tail should grow instead of the head. Growing the tail would require keeping track of which direction it is moving, which would require comparing the tail's previous's and current's x and y positions (where `this.snake[this.snake.length-1]` is set to `this.previousTailPosition` every time the snake moves). This would be the code for such an implementation:
+6. Currently the snake collides if the food displays on the corner because I am adding a new segment to the head of the snake. I would handle this edge case by changing the current code  so that a new segment is added to the tail (instead of to the head like I have in the current implementation) when the snake eats the food. It also seems more "natural" that the tail should grow instead of the head. Growing the tail would require keeping track of which direction it is moving, which would require comparing the tail's previous's and current's x and y positions (where `this.snake[this.snake.length-1]` is set to `this.previousTailPosition` every time the snake moves). This would be the code for such an implementation:
 
 ```javascript
 eat() {
