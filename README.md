@@ -33,7 +33,7 @@ As far as the code implementation, I took an OO approach because:
 
 1. I believe OOP is the best way to represent "real life" objects, making it very suitable for writing a game.
 
-2. OOP allows for cleaner, modular, and scalable code.
+2. OOP allows for clean, modular, and scalable code.
 
 3. In OOP, every class is (or should be) resposible for a single piece of the functionality, which makes code easier to reason about. Additionaly, classes encapsulate code, which prevents collision.
 
