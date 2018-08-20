@@ -23,8 +23,7 @@ It took me about 3.75 hrs to write the core code of this game (not including the
 
 2. Once I became more comfortable with Canvas, I took some time to think about the problems posed by the snake game d possible code implementations. Most tasks seemed reasonably simple to implement such as drawing the canvas, drawing food in random positions on the Canvas, and listening to keyboard events that controlled the snake. The most challenging piece of functionality was to make the snake move properly, which took me some time to figure out.
 
-3. The third step in the "pre coding" stage was to implement some gulp tasks that would ease development and allow me to load javascript modules.
-
+3. The third step in the "pre coding" stage was to implement some gulp tasks that would ease development and allow me to load javascript modules (I adapted tasks that I had already written for previous projects).
 
 
 
@@ -81,7 +80,7 @@ The first step would be review the code and look for places to improve patterns 
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine 
+Follow these instructions to get a copy of the project up and running on your local machine.
 
 
 ### Prerequisites
@@ -102,7 +101,7 @@ Open a terminal window and:
 ```bash
 $ cd ~/Sites #or wherever you keep your projects
 
-$ git clone https://github.com/Naxus28/jquery-gulp-seed.git
+$ git clone https://github.com/Naxus28/js-oop-snake-game.git
 
 $ cd js-oop-snake-game
 
@@ -128,7 +127,7 @@ $ gulp serve
 
 ## Author
 
-**Gabriel Ferraz** | gabrielferraz27@gmail.com
+**Gabriel Ferraz** | Software Developer |  gabrielferraz27@gmail.com
 
 
 
