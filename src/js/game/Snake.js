@@ -65,7 +65,6 @@ export default class Snake {
 			if (this.hasCollided(head)) {
 				this._setPosition({});
 			} else {
-				
 				this._setPosition(head);
 			}
 		}

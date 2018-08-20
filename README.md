@@ -52,7 +52,61 @@ The first step would be review the code and look for places to improve patterns 
 
 4. Make sure classes have all getters and setters they should have.
 
-5. Currently the snake collides if the food displays on the corner. This edge case needs to be handled. The easiest solution would be to prevent the food from displaying on the corner. However this would interfere with the random nature of the food position on the Canvas. A more involved implementation would be to add a new piece to the tail (instead of to the head like I have in the current implementation) when the snake eats the food--it also seems more "natural" that the tail should grow instead of the head. I imagine that growing the tail would require keeping track of the which direction the it is moving, which would require comparing the tail's previous's and current's x and y positions (where current becomes previous every time the snake moves). If I had to recreate the `eat` function, the steps listed above would be my first attempt at it.
+5. Currently the snake collides if the food displays on the corner. This edge case needs to be handled. The easiest solution would be to prevent the food from displaying on the corner. However this would interfere with the random nature of the food position on the Canvas. A more involved implementation would be to add a new piece to the tail (instead of to the head like I have in the current implementation) when the snake eats the food--it also seems more "natural" that the tail should grow instead of the head. Growing the tail would require keeping track of the which direction the it is moving, which would require comparing the tail's previous's and current's x and y positions (where `this.snake[this.snake.length-1]` is set to `this.previousTailPosition` every time the snake moves). This would be the code for such an implementation:
+
+```javascript
+eat() {
+	let currentTail = this.snake[this.snake.length-1];
+	let tailX;
+	let tailY;
+
+	if (this.tailDirection === 'RIGHT') {
+		tailX = currentTail.x - this.boxSize;
+	} else if (this.tailDirection === 'LEFT') {
+		tailX = currentTail.x + this.boxSize;
+	} else if (this.tailDirection === 'UP') {
+		tailY = currentTail.y - this.boxSize;
+	} else  if(this.tailDirection === 'DOWN') {
+		tailY = currentTail.y + this.boxSize;
+	}
+
+	let newTail = { x:tailX, y: tailY };
+	this.snake.push(newTail);
+}
+
+move(direction) {
+	if (!direction) {
+		this._draw(this.snake[0]);
+	} else {
+		this._setDirection(direction);
+		const head = this._getNewHead();
+		this._draw(head);
+		this.previousTailPosition = this.snake[this.snake.length-1];
+
+		if (this.hasCollided(head)) {
+			this._setPosition({});
+		} else {
+			this._setPosition(head);
+		}
+	}
+}
+
+getTailDirection(currentTailPosition) {
+	let tailDirection = '';
+	if (this.previousTailPosition.x < currentTailPosition.x) {
+		this.tailDirection = 'RIGHT';
+	} else if (this.previousTailPosition.x > currentTailPosition.x) {
+		this.tailDirection = 'LEFT';
+	} else if (this.previousTailPosition.y < currentTailPosition.y) {
+		this.tailDirection = 'DOWN';
+	} else if (this.previousTailPosition.y > currentTailPosition.y){
+		this.tailDirection = 'UP';
+	}
+
+	return tailDirection;
+}
+
+```
 
 
 **UI/UX(the game itself)**
