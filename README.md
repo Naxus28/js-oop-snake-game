@@ -126,7 +126,7 @@ getTailDirection(currentTailPosition) {
 
 5. Improve the look of the snake (make it look more like a real snake).
 
-6. Implement arrays of images that represent real food. These arrays would have such taxonomies as "animals", "fruits", "sweets", etc. Images would be randomly chosen from these arrays. These "foods" would bring more diversity to the game as well as they would allow for a richer scoring system. i.e. an apple may be worth 10 points while a pie may be worth 50 points, and so on. 
+6. Implement arrays of images that represent real food. These arrays would have such taxonomies as "animals", "fruits", "sweets", etc. Images would be randomly chosen from these arrays. These "foods" would bring more diversity to the game as well as they would allow for a more exciting scoring system. i.e. an apple may be worth 10 points while a pie may be worth 50 points, and so on. 
 
 7. Allow users to choose different snake colors and scenery such as forest, mountain, city, countryside, beach, etc. The food would match the chosen scenary (i.e. animals and fruits in the forest, fish and sea animals at the beach, etc).
 
