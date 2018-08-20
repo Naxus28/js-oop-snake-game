@@ -77,7 +77,7 @@ The first step would be review the code and look for places to improve patterns 
 
 10. Implement time limit and minimum score to pass a phase. Users play a phase until they achieve the minimum score established for that phase within the time limit. They lose a life for every failed attempt. If a user is doing well, they are rewarded with food that is worth more points to help them complete a phase. 
 
-11. Implement "bonus" phase where more than one piece of food is offered at the same time. 
+11. Implement "bonus" phases where more than one piece of food is offered at the same time. 
 
 12. Implement signup/login and "largest score" so different users can see how well they are doing in relation to one another. 
 
