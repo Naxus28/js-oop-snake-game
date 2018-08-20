@@ -65,7 +65,7 @@ The first step would be review the code and look for places to improve patterns 
 
 4. Implement a nicer "game over" UI (as opposed to an alert box). 
 
-5. Improve the look of the snake (make it look like a real snake).
+5. Improve the look of the snake (make it look more like a real snake).
 
 6. Implement arrays of images that represent real food. These arrays would have such taxonomies as "animals", "fruits", "sweets", etc. These "foods" would bring more diversity to the game as well as they would allow for a richer scoring system. i.e. an apple may be worth 10 points while a pie may be worth 50 points, and so on. 
 
